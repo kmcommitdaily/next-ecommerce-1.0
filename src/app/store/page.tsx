@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import Container from '../components/ui/Container';
 import Card from '../components/ui/Card';
 import Image from 'next/image';
+import Tags from '../components/ui/Tags';
 
 interface ProductProps {
   id: number;
@@ -55,7 +56,13 @@ const Store = () => {
             <h4> {item.title}</h4>
             <div>{item.price}</div>
             <span>{item.stock}</span>
-            <div>{item.tags.join(', ')}</div>
+            {item.tags.map((tag, i) => (
+              <Tags className="bg-blue-200 rounded-lg mr-1" key={i}>
+                {tag}
+              </Tags>
+            ))}
+            {/* <Tags className="bg-blue-50">{item.tags.join(', ')}</Tags> */}
+            {/* <div>{item.tags.join(', ')}</div> */}
           </Card>
         );
       })}
