@@ -4,11 +4,7 @@ interface ButtonProps {
 }
 
 const Button = ({ children, className }: ButtonProps) => {
-  return (
-    <button className={`p-2 max-w-max rounded-md ${className}`}>
-      {children}
-    </button>
-  );
+  return <button className={`p-2 max-w-max  ${className}`}>{children}</button>;
 };
 
 export default Button;
