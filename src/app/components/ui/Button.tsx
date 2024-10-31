@@ -1,5 +1,14 @@
-const Button = () => {
-  return <button>button</button>;
+interface ButtonProps {
+  children: string;
+  className: string;
+}
+
+const Button = ({ children, className }: ButtonProps) => {
+  return (
+    <button className={`p-2 max-w-max rounded-md ${className}`}>
+      {children}
+    </button>
+  );
 };
 
 export default Button;

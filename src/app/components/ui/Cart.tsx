@@ -1,9 +1,7 @@
+import Button from './Button';
+
 const Cart = () => {
-  return (
-    <div className="rounded-md bg-red-200 p-2">
-      <h4>cart</h4>
-    </div>
-  );
+  return <Button className="bg-red-200">Cart</Button>;
 };
 
 export default Cart;

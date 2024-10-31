@@ -18,7 +18,8 @@ const Header = () => {
           </li>
         </ul>
         <div className="flex space-x-4">
-          <h3 className="rounded-md bg-red-200 p-2">Pro</h3>
+          <h3 className="rounded-md bg-red-200 p-2">Pro</h3>{' '}
+          {/** CHANGE THIS INTO BUTTON IN THE FUTURE */}
           <Cart />
         </div>
       </nav>
