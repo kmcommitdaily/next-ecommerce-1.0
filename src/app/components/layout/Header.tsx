@@ -5,12 +5,17 @@ import Cart from '../ui/Cart';
 import SearchInput from '../ui/SearchInput';
 import Button from '../ui/Button';
 import { useState } from 'react';
+import { motion } from 'framer-motion';
+
+const navList = ['Home', 'About', 'Store'];
 
 const Header = () => {
   const [isFocused, setIsFocused] = useState(false);
+  const [selectedNav, setSelectedNav] = useState(navList[0]);
+
   return (
     <>
-      <div className="bg-red-50 sticky top-0 border p-4 rounded-sm  ">
+      <div className="bg-red-50 sticky top-0  shadow-md p-4 rounded-sm   ">
         <header className=" flex justify-between items-center ">
           <h3>logo</h3>
           <div
@@ -39,15 +44,26 @@ const Header = () => {
         </header>
         <nav className="block mt-4">
           <ul className="flex justify-center space-x-4 ">
-            <li>
-              <Link href={'/'}>Home</Link>
-            </li>
-            <li>
-              <Link href={'/about'}>About</Link>
-            </li>
-            <li>
-              <Link href={'/store'}>Store</Link>
-            </li>
+            {navList.map((label) => (
+              <li
+                key={label}
+                onClick={() => setSelectedNav(label)}
+                className={`relative, cursor-pointer`}>
+                <Link href={label === 'Home' ? '/' : label.toLowerCase()}>
+                  {label}
+                </Link>
+                {selectedNav === label && (
+                  <motion.div
+                    className="border bg-blue-600 bg-opacity-40"
+                    key={label}
+                    initial={{ y: 10, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: -10, opacity: 0 }}
+                    transition={{ duration: 0.2 }}
+                  />
+                )}
+              </li>
+            ))}
           </ul>
         </nav>
       </div>

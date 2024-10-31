@@ -39,7 +39,7 @@ const Store = () => {
   }, []);
 
   return (
-    <Container className="bg-red-100   grid grid-cols-5 justify-items-center gap-4  ">
+    <Container className="  grid grid-cols-5 justify-items-center gap-4  ">
       {product.map((item) => {
         console.log(item.id);
         return (
