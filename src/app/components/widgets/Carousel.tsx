@@ -38,7 +38,14 @@ const Carousel = () => {
 
   return (
     <>
-      <ul ref={ref} className="flex overflow-x-scroll scrollbar-thin space-x-6">
+      <ul
+        ref={ref}
+        style={{
+          // removed scrollbar
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none',
+        }}
+        className="flex overflow-x-scroll scrollbar-hidden scrollbar-thin space-x-6">
         {categories.map((category, index) => (
           <motion.li
             key={category.name}
