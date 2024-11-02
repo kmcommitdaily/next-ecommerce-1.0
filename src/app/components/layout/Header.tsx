@@ -6,6 +6,7 @@ import SearchInput from '../ui/SearchInput';
 import Button from '../ui/Button';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import Dropdown from '../ui/Dropdown';
 
 const navList = ['Home', 'About', 'Store'];
 
@@ -18,6 +19,7 @@ const Header = () => {
       <div className="bg-red-50 sticky top-0  shadow-md p-4 rounded-sm   ">
         <header className=" flex justify-between items-center ">
           <h3>logo</h3>
+          <Dropdown className="bg-red-400" />
           <div
             className={`flex flex-grow rounded-full inset-0 mx-4 p-1   shadow-sm w-full sm:w-auto ${
               isFocused
