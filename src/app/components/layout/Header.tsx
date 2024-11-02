@@ -19,7 +19,7 @@ const Header = () => {
       <div className="bg-red-50 sticky top-0  shadow-md p-4 rounded-sm   ">
         <header className=" flex justify-between items-center ">
           <h3>logo</h3>
-          <Dropdown className="bg-red-400" />
+          <Dropdown className="bg-white" />
           <div
             className={`flex flex-grow rounded-full inset-0 mx-4 p-1   shadow-sm w-full sm:w-auto ${
               isFocused

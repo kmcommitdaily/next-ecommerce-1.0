@@ -24,31 +24,31 @@ function useMenuAnimation(isOpen: boolean) {
     }
     if (scope.current) {
       animate('.arrow', { rotate: isOpen ? 180 : 0 }, { duration: 0.2 });
+      // REMOVED FOR SIMPLE EFFECTS
+      // animate(
+      //   'ul',
+      //   {
+      //     clipPath: isOpen
+      //       ? 'inset(0% 0% 0% 0% round 10px)'
+      //       : 'inset(10% 50% 90% 50% round 10px)',
+      //   },
+      //   {
+      //     type: 'spring',
+      //     bounce: 0,
+      //     duration: 0.5,
+      //   }
+      // );
 
-      animate(
-        'ul',
-        {
-          clipPath: isOpen
-            ? 'inset(0% 0% 0% 0% round 10px)'
-            : 'inset(10% 50% 90% 50% round 10px)',
-        },
-        {
-          type: 'spring',
-          bounce: 0,
-          duration: 0.5,
-        }
-      );
-
-      animate(
-        'li',
-        isOpen
-          ? { opacity: 1, scale: 1, filter: 'blur(0px)' }
-          : { opacity: 0, scale: 0.3, filter: 'blur(20px)' },
-        {
-          duration: 0.2,
-          delay: isOpen ? staggerMenuItems : 0,
-        }
-      );
+      // animate(
+      //   'li',
+      //   isOpen
+      //     ? { opacity: 1, scale: 1, filter: 'blur(0px)' }
+      //     : { opacity: 0, scale: 0.3, filter: 'blur(20px)' },
+      //   {
+      //     duration: 0.2,
+      //     delay: isOpen ? staggerMenuItems : 0,
+      //   }
+      // );
     }
   }, [isOpen, animate, scope]);
 
@@ -110,11 +110,14 @@ const Dropdown = ({ className }: DropdownProps) => {
       <ul
         style={{
           pointerEvents: isOpen ? 'auto' : 'none',
+          backgroundColor: 'white',
+          boxShadow: ' 4px 4px 5px rgba(0, 0, 0, 0.2)',
+          position: 'absolute',
           clipPath: isOpen
             ? 'inset(0% 0% 0% 0% round 10px)'
             : 'inset(10% 50% 90% 50% round 10px)',
-          maxHeight: isOpen ? '200px' : 0,
-          overflow: 'hidden',
+          height: isOpen ? 'auto' : 0,
+          overflow: isOpen ? 'visible' : 'hidden',
         }}>
         {categories.map((category, index) => (
           <li key={index}>{category.name}</li>
