@@ -101,11 +101,13 @@ const Dropdown = ({ className }: DropdownProps) => {
         whileTap={{ scale: 0.97 }}
         onClick={() => setIsOpen(!isOpen)}>
         Categories {/**make it more dynamic */}
-        <div className="arrow" style={{ transformOrigin: '50% 55%' }}>
+        <motion.div
+          className="arrow"
+          style={{ transformOrigin: '50% 50%', display: 'inline-block' }}>
           <svg width="15" height="15" viewBox="0 0 20 20">
             <path d="M0 7 L 20 7 L 10 16" />
           </svg>
-        </div>
+        </motion.div>
       </motion.button>
       <ul
         style={{
