@@ -1,6 +1,6 @@
 'use client';
-import { ReactNode, useRef } from 'react';
-
+import { useRef } from 'react';
+import useStoreData from '@/hooks/useStoreData';
 interface DropdownProps {
   icon?: string; //change it soon
   children?: string[];
@@ -9,9 +9,9 @@ interface DropdownProps {
 }
 
 import { useState, useEffect } from 'react';
-import { useAnimate, stagger, motion } from 'framer-motion';
+import { useAnimate, motion } from 'framer-motion';
 
-const staggerMenuItems = stagger(0.1, { startDelay: 0.15 });
+// const staggerMenuItems = stagger(0.1, { startDelay: 0.15 });
 
 function useMenuAnimation(isOpen: boolean) {
   const [scope, animate] = useAnimate();
@@ -24,66 +24,16 @@ function useMenuAnimation(isOpen: boolean) {
     }
     if (scope.current) {
       animate('.arrow', { rotate: isOpen ? 180 : 0 }, { duration: 0.2 });
-      // REMOVED FOR SIMPLE EFFECTS
-      // animate(
-      //   'ul',
-      //   {
-      //     clipPath: isOpen
-      //       ? 'inset(0% 0% 0% 0% round 10px)'
-      //       : 'inset(10% 50% 90% 50% round 10px)',
-      //   },
-      //   {
-      //     type: 'spring',
-      //     bounce: 0,
-      //     duration: 0.5,
-      //   }
-      // );
-
-      // animate(
-      //   'li',
-      //   isOpen
-      //     ? { opacity: 1, scale: 1, filter: 'blur(0px)' }
-      //     : { opacity: 0, scale: 0.3, filter: 'blur(20px)' },
-      //   {
-      //     duration: 0.2,
-      //     delay: isOpen ? staggerMenuItems : 0,
-      //   }
-      // );
     }
   }, [isOpen, animate, scope]);
 
   return scope;
 }
 
-interface CategoryProps {
-  slug?: string;
-  name?: string;
-  url?: string;
-}
-
 const Dropdown = ({ className }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const scope = useMenuAnimation(isOpen);
-  const [categories, setCategories] = useState<CategoryProps[]>([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          'https://dummyjson.com/products/categories'
-        );
-        if (!response.ok) {
-          throw new Error(`HTTP error: ${response.status}`);
-        }
-        const data = await response.json();
-        setCategories(data);
-      } catch (error) {
-        console.error('error in fetching', error);
-      }
-    };
-
-    fetchData();
-  }, []);
+  const { categories } = useStoreData();
 
   return (
     <nav className={`${className}`} ref={scope}>

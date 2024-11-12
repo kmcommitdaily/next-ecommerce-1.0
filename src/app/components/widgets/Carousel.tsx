@@ -1,46 +1,22 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
-import { motion, useScroll } from 'framer-motion';
+import { useRef } from 'react';
+import { motion } from 'framer-motion';
 import Card from '../ui/Card';
+import useStoreData from '@/hooks/useStoreData';
 import Image from 'next/image';
-
-interface CategoryProps {
-  slug?: string;
-  name?: string;
-  url?: string;
-}
 
 const Carousel = () => {
   const ref = useRef(null);
-  const { scrollXProgress } = useScroll({ container: ref });
 
-  const [categories, setCategories] = useState<CategoryProps[]>([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          'https://dummyjson.com/products/categories'
-        );
-        if (!response.ok) {
-          throw new Error(`HTTP error: ${response.status}`);
-        }
-        const data = await response.json();
-        setCategories(data);
-      } catch (error) {
-        console.error('error in fetching', error);
-      }
-    };
-
-    fetchData();
-  }, []);
+  const { categories } = useStoreData();
 
   return (
     <>
       <ul
         ref={ref}
         style={{
+          // when in safari, this does not works
           // removed scrollbar
           scrollbarWidth: 'none',
           msOverflowStyle: 'none',
