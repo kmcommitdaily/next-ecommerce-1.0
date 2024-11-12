@@ -12,7 +12,6 @@ const Store = () => {
   return (
     <Container className="  grid grid-cols-5 justify-items-center gap-4  ">
       {products.map((item) => {
-        console.log(item.id);
         return (
           <Card className="bg-green-200 p-4 " key={item.id}>
             <Image

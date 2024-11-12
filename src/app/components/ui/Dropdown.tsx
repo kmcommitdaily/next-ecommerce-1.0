@@ -1,6 +1,9 @@
 'use client';
 import { useRef } from 'react';
-import useStoreData from '@/hooks/useStoreData';
+import useStoreData, { CategoryProps } from '@/hooks/useStoreData';
+import { ProductProps } from '@/hooks/useStoreData';
+import Card from './Card';
+import Image from 'next/image';
 interface DropdownProps {
   icon?: string; //change it soon
   children?: string[];
@@ -33,7 +36,15 @@ function useMenuAnimation(isOpen: boolean) {
 const Dropdown = ({ className }: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const scope = useMenuAnimation(isOpen);
-  const { categories } = useStoreData();
+  const { categories, products } = useStoreData();
+  // const [selectedCategory, setSelectedCategory] =
+  //   useState<CategoryProps | null>(null);
+
+  // const handleClick = (category: CategoryProps) => {
+  //   setSelectedCategory(category);
+  // };
+
+  // const filteredCategory = selectedCategory ? products.filter((product) => product.category === selectedCategory.name) : []
 
   return (
     <nav className={`${className}`} ref={scope}>
@@ -70,9 +81,22 @@ const Dropdown = ({ className }: DropdownProps) => {
             : 'inset(10% 50% 90% 50% round 10px)',
           height: isOpen ? 'auto' : 0,
           overflow: isOpen ? 'visible' : 'hidden',
+          padding: '10px',
+          cursor: 'pointer',
         }}>
         {categories.map((category, index) => (
-          <li key={index}>{category.name}</li>
+          // category clicked
+          // if the category.name match the product.category
+          // api fetch will call the producst with the same categories
+          // it will be dispaly using Card components
+          <li
+            className="hover:bg-blue-400"
+            // onClick={() => {
+            //   handleClick(category);
+            // }}
+            key={index}>
+            {category.name}
+          </li>
         ))}
       </ul>{' '}
     </nav>

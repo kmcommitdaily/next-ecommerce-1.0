@@ -1,19 +1,20 @@
 import { useEffect, useState } from 'react';
 
-interface ProductProps {
+export interface ProductProps {
   id: number;
   title: string;
   price: number;
   images: string[];
   stock: number;
   tags: string[];
+  category?: string;
 }
 
 interface ResponseProps {
   products: ProductProps[];
 }
 
-interface CategoryProps {
+export interface CategoryProps {
   slug?: string;
   name?: string;
   url?: string;
