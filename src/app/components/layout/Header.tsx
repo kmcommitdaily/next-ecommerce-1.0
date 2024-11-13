@@ -8,7 +8,14 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Dropdown from '../ui/Dropdown';
 
-const navList = ['Home', 'About', 'Store'];
+const navList = [
+  'Home',
+  'Shops',
+  'Deals',
+  'Beauty',
+  'Best-seller',
+  'Top-rated',
+];
 
 const Header = () => {
   const [isFocused, setIsFocused] = useState(false);
