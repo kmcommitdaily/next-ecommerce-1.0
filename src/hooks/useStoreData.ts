@@ -8,6 +8,10 @@ export interface ProductProps {
   stock: number;
   tags: string[];
   category?: string;
+  // Flattened field
+  name: string; // Flattened field
+  rating: number; // Flattened field
+  brand?: string;
 }
 
 interface ResponseProps {
@@ -16,8 +20,17 @@ interface ResponseProps {
 
 export interface CategoryProps {
   slug?: string;
-  name?: string;
+  name: string;
   url?: string;
+  price: number;
+  images: string[];
+  stock: number;
+  tags: string[];
+  category?: string;
+  // Flattened field
+  // Flattened field
+  rating: number; // Flattened field
+  brand?: string;
 }
 
 const useStoreData = () => {
