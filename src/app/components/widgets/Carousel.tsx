@@ -45,14 +45,14 @@ const Carousel = () => {
         className="flex overflow-x-scroll scrollbar-hidden scrollbar-thin space-x-6">
         {products.map((product, index) => (
           <motion.li
-            key={product.name}
+            key={index}
             initial={{ opacity: 0, x: -20 }} // Start off-screen
             animate={{ opacity: 1, x: 0 }} // Slide in to position
             transition={{ duration: 0.3, delay: index * 0.1 }}>
             {/** REFACTOR THIS SO ONLY NEEDED FEATURES BY CATEGORY WILL BE DISPLAYED */}
             <Card
               pick
-              className="bg-green-200 p-4 w-[600px] "
+              className="bg-green-200 p-4 w-[300px] "
               product={product}
               key={index}></Card>
           </motion.li>

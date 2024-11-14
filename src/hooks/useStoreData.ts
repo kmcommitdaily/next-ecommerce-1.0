@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 
 export interface ProductProps {
   id: number;
@@ -12,30 +12,26 @@ export interface ProductProps {
   name: string; // Flattened field
   rating: number; // Flattened field
   brand?: string;
+  discount?: number;
 }
 
 interface ResponseProps {
   products: ProductProps[];
 }
 
-export interface CategoryProps {
+// interface RatingProps {
+// icon?: ReactNode
+// }
+
+export interface CategoryProps extends ProductProps {
   slug?: string;
-  name: string;
   url?: string;
-  price: number;
-  images: string[];
-  stock: number;
-  tags: string[];
-  category?: string;
-  // Flattened field
-  // Flattened field
-  rating: number; // Flattened field
-  brand?: string;
 }
 
 const useStoreData = () => {
   const [products, setProducts] = useState<ProductProps[]>([]);
   const [categories, setCategories] = useState<CategoryProps[]>([]);
+  // const [ratings, setRatings] = useState<RatingProps[]>([])
 
   useEffect(() => {
     const fetchStoreData = async () => {
@@ -44,6 +40,7 @@ const useStoreData = () => {
         const categoriesResponse = await fetch(
           'https://dummyjson.com/products/categories'
         );
+
         const productsData = (await productsResponse.json()) as ResponseProps;
         const categoriesData = await categoriesResponse.json();
 

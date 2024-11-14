@@ -1,5 +1,13 @@
 const BestSeller = () => {
-  return <h1>Best seller</h1>;
+  const FilterItems = ['Category', 'Rating', 'Brand', 'Service & Promotions'];
+
+  return (
+    <ul>
+      {FilterItems.map((item, index) => (
+        <li key={index}>{item}</li>
+      ))}
+    </ul>
+  );
 };
 
 export default BestSeller;

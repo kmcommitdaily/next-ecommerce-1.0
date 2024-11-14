@@ -6,7 +6,7 @@ import Image from 'next/image';
 import Tags from '../components/ui/Tags';
 import useStoreData from '@/hooks/useStoreData';
 
-const Shops = () => {
+const Decors = () => {
   const { products } = useStoreData();
 
   return (
@@ -25,4 +25,4 @@ const Shops = () => {
   );
 };
 
-export default Shops;
+export default Decors;

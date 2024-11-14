@@ -10,10 +10,10 @@ import Dropdown from '../ui/Dropdown';
 
 const navList = [
   'Home',
-  'Shops',
-  'Deals',
   'Beauty',
   'Best-seller',
+  'Decors',
+  'Deals',
   'Top-rated',
 ];
 
