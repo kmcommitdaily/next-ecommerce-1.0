@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { CategoryProps } from '@/hooks/useStoreData';
 import useStoreData from '@/hooks/useStoreData';
+import { filterItemsProps } from '@/app/decors/page';
 
 // PROPS
 // TITLE
@@ -13,31 +14,30 @@ import useStoreData from '@/hooks/useStoreData';
 
 interface FilterCardProps {
   title: string;
+  setSelectedCategory: (categoryId: string | null) => void;
+  visibleCounts: filterItemsProps;
+  setVisibleCounts: React.Dispatch<React.SetStateAction<filterItemsProps>>;
 }
 
-interface filterItemsProps {
-  [key: string]: number;
-}
-
-const filterItems = {
-  Category: 4,
-  Rating: 4,
-  Brand: 4,
-};
-
-const FilterCard = ({ title }: FilterCardProps) => {
+const FilterCard = ({
+  title,
+  setSelectedCategory,
+  visibleCounts,
+  setVisibleCounts,
+}: FilterCardProps) => {
   const { categories, products } = useStoreData();
-  const [visibleCounts, setVisibleCounts] =
-    useState<filterItemsProps>(filterItems);
 
   const showMoreItems = (section: string, totalCount: number) => {
     setVisibleCounts((prev) => ({
-      ...prev, // Spread the previous state to keep other sections unchanged
-      [section]: totalCount, // Update the section that was clicked
+      ...prev,
+      [section]: totalCount,
     }));
   };
 
+  // when a categroy was clicked then find yhe id of selected category and display it on card
+
   const FilterItems = ['Category', 'Rating', 'Brand'];
+  // console.log('Categories:', categories); // Log the categories data structure
 
   return (
     <div>
@@ -50,21 +50,23 @@ const FilterCard = ({ title }: FilterCardProps) => {
                 key={index}>
                 <div>
                   <div className="font-black">{item}</div>
+
                   {categories
+
                     .slice(0, visibleCounts.Category)
                     .map((category) => {
-                      console.log('Category:', category.name);
-                      // const itemsUnderCategory = products.filter((product) => {
-                      //   console.log('Product Category:', product.category);
-                      //   return (
-                      //     product.category?.trim().toLowerCase() ===
-                      //     category.name.trim().toLowerCase()
-                      //   );
-                      // }).length;
+                      // console.log('Category:', category.name);
 
                       return (
                         <div key={category.id}>
-                          <div>{category.name}</div>
+                          <div
+                            className="cursor-pointer hover:bg-blue-300"
+                            onClick={() => {
+                              console.log('Category ID:', category.id);
+                              setSelectedCategory(category.slug);
+                            }}>
+                            {category.name}
+                          </div>
                           {/* <span className="ml-9">{`(${itemsUnderCategory})`}</span> */}
                         </div>
                       );
@@ -83,38 +85,44 @@ const FilterCard = ({ title }: FilterCardProps) => {
             );
           } else if (item === 'Rating') {
             return (
-              <li key={index}>
+              <li
+                className="w-[250px] p-5 mb-5 border-b-2 border-gray-600 inset-0 border-opacity-30  "
+                key={index}>
                 <div>
-                  <div>{item}</div>
+                  <div className="font-black">{item}</div>
                   {products.slice(0, visibleCounts.Rating).map((product) => (
                     <div key={product.id}>{product.rating}</div>
                   ))}
                 </div>
                 {visibleCounts.Rating < products.length && (
                   <button
+                    className="font-bold font-medium"
                     onClick={() => {
                       showMoreItems('Rating', products.length);
                     }}>
-                    Show more
+                    ...show more
                   </button>
                 )}
               </li>
             );
           } else if (item === 'Brand') {
             return (
-              <li key={index}>
+              <li
+                className="w-[250px] p-5 mb-5 border-b-2  border-gray-600 inset-0 border-opacity-30  "
+                key={index}>
                 <div>
-                  <div>{item}</div>
+                  <div className="font-black">{item}</div>
                   {products.slice(0, visibleCounts.Brand).map((product) => (
                     <div key={product.id}>{product.brand}</div>
                   ))}
                 </div>
                 {visibleCounts.Brand < products.length && (
                   <button
+                    className="font-bold font-medium"
                     onClick={() => {
                       showMoreItems('Brand', products.length);
                     }}>
-                    Show more
+                    ...show more
                   </button>
                 )}
               </li>

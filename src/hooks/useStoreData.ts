@@ -8,6 +8,7 @@ export interface ProductProps {
   stock: number;
   tags: string[];
   category?: string;
+  categoryId: number;
   // Flattened field
   name: string; // Flattened field
   rating: number; // Flattened field
@@ -24,7 +25,7 @@ interface ResponseProps {
 // }
 
 export interface CategoryProps extends ProductProps {
-  slug?: string;
+  slug: string;
   url?: string;
 }
 
