@@ -7,7 +7,7 @@ export interface ProductProps {
   images: string[];
   stock: number;
   tags: string[];
-  category?: string;
+  category: string;
   categoryId: number;
   // Flattened field
   name: string; // Flattened field

@@ -38,7 +38,7 @@ const Card = ({ children, className, pick, common, product }: CardProps) => {
     );
   } else if (common) {
     return (
-      <div className={`max-w-max min-w-full max-h-96 ${className}`}>
+      <div className={`max-w-max min-w-full max-h-max ${className}`}>
         {/** ADD TAGS HERE FOR POPULAR PRODUCTS */}
         <>
           <Image

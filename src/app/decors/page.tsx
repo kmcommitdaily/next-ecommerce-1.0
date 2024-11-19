@@ -11,7 +11,7 @@ export interface filterItemsProps {
 }
 
 const filterItems = {
-  Category: 10,
+  Category: 4,
   Rating: 4,
   Brand: 4,
 };
@@ -21,20 +21,30 @@ const Decors = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [visibleCounts, setVisibleCounts] =
     useState<filterItemsProps>(filterItems);
+  const [productByCat, setProductByCat] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState(products);
-
-  // Handle product filtering when category or visible count changes
+  console.log('product by cat:', productByCat);
+  console.log('selected cat:', selectedCategory);
   useEffect(() => {
-    const updatedFilteredProducts = selectedCategory
-      ? products.filter((product) => product.category === selectedCategory)
-      : products;
+    const fetchProductByCategory = async () => {
+      try {
+        const productByCategoryRes = await fetch(
+          `https://dummyjson.com/products/category/${selectedCategory}`
+        );
 
-    // Update the filtered products list whenever products or selected category change
-    setFilteredProducts(updatedFilteredProducts);
-  }, [selectedCategory, products]);
+        console.log('response:', productByCategoryRes);
 
-  // Slice the filtered products based on the visible count of categories
-  const productsToDisplay = filteredProducts.slice(0, visibleCounts.Category);
+        const data = await productByCategoryRes.json();
+        console.log('Fetched data:', data);
+        setProductByCat(data.products || []);
+      } catch (error) {
+        console.error('error in fetching', error);
+      }
+    };
+    fetchProductByCategory();
+  }, [selectedCategory]);
+
+  const productToDisplay = selectedCategory ? productByCat : products;
 
   return (
     <Container className="flex space-x-2">
@@ -45,18 +55,16 @@ const Decors = () => {
         setVisibleCounts={setVisibleCounts}
       />
       <div className="grid grid-cols-4 justify-items-center gap-4">
-        {productsToDisplay.length === 0 ? (
-          <p>No products found for this category.</p>
-        ) : (
-          productsToDisplay.map((item) => (
-            <Card
-              pick
-              className="bg-white shadow-md p-4"
-              product={item}
-              key={item.id}
-            />
-          ))
-        )}
+        {productToDisplay && productToDisplay.length > 0
+          ? productToDisplay.map((item) => (
+              <Card
+                common
+                className="bg-white shadow-md p-4"
+                product={item}
+                key={item.id}
+              />
+            ))
+          : '...Loading'}
       </div>
     </Container>
   );

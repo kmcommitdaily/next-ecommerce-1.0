@@ -62,7 +62,7 @@ const FilterCard = ({
                           <div
                             className="cursor-pointer hover:bg-blue-300"
                             onClick={() => {
-                              console.log('Category ID:', category.id);
+                              // console.log('Category ID:', category.id);
                               setSelectedCategory(category.slug);
                             }}>
                             {category.name}
@@ -113,7 +113,15 @@ const FilterCard = ({
                 <div>
                   <div className="font-black">{item}</div>
                   {products.slice(0, visibleCounts.Brand).map((product) => (
-                    <div key={product.id}>{product.brand}</div>
+                    <div
+                      key={product.id}
+                      className="cursor-pointer hover:bg-blue-300"
+                      onClick={() => {
+                        // console.log('Category ID:', category.id);
+                        setSelectedCategory(product.category);
+                      }}>
+                      {product.brand}
+                    </div>
                   ))}
                 </div>
                 {visibleCounts.Brand < products.length && (
