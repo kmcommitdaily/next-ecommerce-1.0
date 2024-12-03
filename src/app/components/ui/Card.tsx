@@ -21,13 +21,13 @@ const Card = ({ children, className, pick, common, product }: CardProps) => {
       <div className={`max-w-max min-w-full max-h-96 ${className}`}>
         <>
           <Image
-            className="h-48 w-48"
+            className="h-48 w-48 "
             src={`${product.images[0]}`} // Ensure this exists
             alt={product.name || 'Product Image'}
-            width={300}
-            height={300}
-            layout="fixed"
-            objectFit="contain"
+            fill
+            style={{
+              objectFit: 'contain',
+            }}
           />
           <h4>{product.name || ''}</h4>
           <div>{product.rating}</div>

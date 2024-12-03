@@ -64,7 +64,7 @@ const Decors = () => {
                 key={item.id}
               />
             ))
-          : '...Loading'}
+          : '...Loading '}
       </div>
     </Container>
   );
